@@ -1,0 +1,94 @@
+# 作业1
+#include <stdlib.h>
+
+typedef struct node {
+    int data;
+    struct node* pNext;
+}Node;
+
+typedef struct {
+    Node* head;
+    Node* tail;
+    int len;
+}RecentCounter;
+
+void enQueue(RecentCounter* queue, int elem);
+int deQueue(RecentCounter* queue);
+int peek(RecentCounter* queue);
+
+RecentCounter* recentCounterCreate(void);
+int recentCounterPing(RecentCounter* obj,int t);
+void recentCounterFree(RecentCounter* obj);
+
+RecentCounter* recentCounterCreate() {
+    RecentCounter* p = (RecentCounter*)malloc(sizeof(RecentCounter));
+    p->head = p->tail = NULL;
+    p->len = 0;
+    return p;
+}
+void enQueue(RecentCounter* queue, int elem) {
+    Node* pnewNode = (Node*) malloc(sizeof(Node));
+    pnewNode->data = elem;
+    pnewNode->pNext = NULL;
+    if (queue->tail = NULL) {
+        queue->tail = pnewNode;
+        queue->head = pnewNode;
+    } else {
+        queue->tail->pNext = pnewNode;
+        queue->tail = pnewNode;
+        
+    }
+    queue->len++;
+}
+int deQueue(RecentCounter* queue) {
+    Node* temp = queue->head;
+    queue->head = temp->pNext;
+    if (queue->head = NULL) {
+        queue->tail = NULL;
+        
+    }
+    queue->len--;
+    int r = temp->data;
+    free(temp);
+    return r;
+}
+
+int peek(RecentCounter* queue);
+return queue->head->data;
+
+int recentCounterPing(RecentCounter* obj, int t) {
+    enQueue(obj, t);
+    while( peak(obj) < (t - 3000)) {
+        deQueue(obj);
+    }
+    return obj->len;
+}
+
+void recentCounterFree(RecentCounter* obj) {
+    while(obj->len->0)
+        deQueue(obj);
+    free(obj);
+}
+
+# 作业2
+将具有“一对多”关系的集合中的数据元素按照图的形式进行存储，整个存储形状在逻辑结构上看，类似于实际生活中倒着的树，所以称这种存储结构为“树型”存储结构
+使用树结构存储的每一个数据元素都被称为“结点”
+
+满足以下两个条件的树就是二叉树：
+1、本身是有序树；
+2、树中包含的各个节点的度不能超过 2，即只能是 0、1 或者 2；
+
+二叉树的性质：
+1、二叉树中，第 i 层最多有 2i-1 个结点。
+2、如果二叉树的深度为 K，那么此二叉树最多有 2K-1 个结点。
+3、二叉树中，终端结点数（叶子结点数）为 n0，度为 2 的结点数为 n2，则 n0=n2+1。
+
+满二叉树
+如果二叉树中除了叶子结点，每个结点的度都为 2，则此二叉树称为满二叉树。
+
+完全二叉树
+如果二叉树中除去最后一层节点为满二叉树，且最后一层的结点依次从左到右分布，则此二叉树被称为完全二叉树。
+
+存储完全二叉树
+使用顺序表存储二叉树，并将各分支缺少的部分用0补完，以形成完全二叉树的结构；
+当将普通二叉树转换为完全二叉树进行储存时会出现空间浪费的现象。
